@@ -6,31 +6,31 @@ let saveButton = popUp.querySelector('.popup__save-button');
 let profileName = profileContainer.querySelector('.profile__name');
 let profileCareer = profileContainer.querySelector('.profile__career');
 let nameInput = popUp.querySelector('.popup__name');
-let jobInput = popUp.querySelector('.popup__job');
+let careerInput = popUp.querySelector('.popup__career');
+
 
 function openPopUp() {
-  editButton.addEventListener('click', function() {
   popUp.classList.add('popup_opened');
-})
-};
+}
 
-openPopUp();
+editButton.addEventListener('click', openPopUp);
 
 
 function closePopUp() {
-  closeButton.addEventListener('click', function() {
-  popUp.classList.remove('popup_opened')
-})
-};
+  popUp.classList.remove('popup_opened');
+}
 
-closePopUp();
+closeButton.addEventListener('click', closePopUp);
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
+  nameInput.getAttribute('value');
+  careerInput.getAttribute('value');
   profileName.textContent = nameInput.value;
-  console.log(profileName);
-  profileCareer.textContent = jobInput.value;
+  profileCareer.textContent = careerInput.value;
   closePopUp();
-};
+}
 
 popUp.addEventListener('submit', formSubmitHandler);
+
+

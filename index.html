@@ -6,7 +6,7 @@
   <meta name="keywords" content="html, css, js">
   <meta name="author" content="Антон Григораш">
   <title>Жак-Ив Кусто</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
@@ -16,13 +16,13 @@
 
   <main>
     <section class="profile">
+      <img src="./images/Avatar.png" alt="Фотография Жака-Ива Кусто" class="profile__avatar">
       <div class="profile__content">
-        <img src="./images/Avatar.png" alt="Фотография Жака-Ива Кусто" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button type= "button" class="profile__edit-button"></button>
-          <p class="profile__career">Исследователь океана</p>
         </div>
+        <p class="profile__career">Исследователь океана</p>
       </div>
       <button type= "button" class="profile__add-button"></button>
     </section>
@@ -51,7 +51,7 @@
           </div>
         </li>
         <li class="element">
-            <img src="./images/mounth-elbrus.png" alt="Гора Эльбрус" class="element__image">
+          <img src="./images/mounth-elbrus.png" alt="Гора Эльбрус" class="element__image">
             <div class="element__info">
               <h2 class="element__title">Гора Эльбрус</h2>
               <button class="element__like"></button>
@@ -75,25 +75,26 @@
     </section>
 
     <section class="popup">
-      <button class="popup__close-button"></button>
       <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <fieldset class="popup__form">
-          <label class="popup__form-field">
+        <form class="popup__form">
+          <label class="popup__field">
             <input id="name" type="text" class="popup__name" value="Жак-Ив Кусто">
           </label>
-          <label class="popup__form-field">
-            <input id="career" type="text" class="popup__job" value="Исследователь океана">
+          <label class="popup__field">
+            <input id="career" type="text" class="popup__career" value="Исследователь океана">
           </label>
-        </fieldset>
-        <button class="popup__save-button" type="submit" id="save">Сохранить</button>
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
       </div>
     </section>
+
     <footer class="footer">
       <p class="footer__text">© 2022 Mesto Russia</p>
     </footer>
 
   </main>
-  <script src="script.js"></script>
+  <script src="./pages/index.js"></script>
 </body>
 </html>
