@@ -9,6 +9,7 @@ let nameInput = popUp.querySelector('.popup__name');
 let careerInput = popUp.querySelector('.popup__career');
 
 
+
 function openPopUp() {
   popUp.classList.add('popup_opened');
 }
@@ -32,5 +33,6 @@ function formSubmitHandler (evt) {
 }
 
 popUp.addEventListener('submit', formSubmitHandler);
+
 
 
