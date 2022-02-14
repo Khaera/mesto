@@ -10,5 +10,7 @@
 }
 
 @media screen and (max-width: 767px) {
-
+  .elements__list {
+    row-gap: 19px;
+  }
 }

@@ -33,68 +33,69 @@
           <img src="./images/karachaevsk.png" alt="Карачаевск" class="element__image">
           <div class="element__info">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </li>
         <li class="element">
           <img src="./images/mounth-elbrus.png" alt="Гора Эльбрус" class="element__image">
           <div class="element__info">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </li>
         <li class="element">
           <img src="./images/dombai.png" alt="Домбай" class="element__image">
           <div class="element__info">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </li>
         <li class="element">
           <img src="./images/mounth-elbrus.png" alt="Гора Эльбрус" class="element__image">
-            <div class="element__info">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like"></button>
-            </div>
+          <div class="element__info">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button type="button" class="element__like"></button>
+          </div>
         </li>
         <li class="element">
           <img src="./images/dombai.png" alt="Домбай" class="element__image">
           <div class="element__info">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </li>
         <li class="element">
           <img src="./images/karachaevsk.png" alt="Карачаево-Черкесск" class="element__image">
           <div class="element__info">
             <h2 class="element__title">Карачаево-Черкесск</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </li>
       </ul>
     </section>
 
-    <section class="popup">
+    <div class="popup">
       <div class="popup__container">
         <button type="button" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form">
+        <form name="edit-info" class="popup__form">
           <label class="popup__field">
-            <input id="name" type="text" class="popup__name" value="Жак-Ив Кусто">
+            <input id="name" name="name" type="text" class="popup__info popup__info_edit_name" required placeholder="Ваше имя">
           </label>
           <label class="popup__field">
-            <input id="career" type="text" class="popup__career" value="Исследователь океана">
+            <input id="career" name="career" type="text" class="popup__info popup__info_edit_career" required placeholder="Род деятельности">
           </label>
           <button type="submit" class="popup__save-button">Сохранить</button>
         </form>
       </div>
-    </section>
-
-    <footer class="footer">
-      <p class="footer__text">© 2022 Mesto Russia</p>
-    </footer>
-
+    </div>
   </main>
-  <script src="./pages/index.js"></script>
+
+  <footer class="footer">
+    <p class="footer__text">© 2022 Mesto Russia</p>
+  </footer>
+
+  <script src="./scripts/index.js"></script>
 </body>
+
 </html>

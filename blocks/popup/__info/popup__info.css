@@ -1,4 +1,4 @@
-.popup__name {
+.popup__info {
   border: 0;
   border-bottom: 1px solid rgba(84, 84, 84, 0.2);
   width: 100%;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .popup__name {
+  .popup__info {
     padding-bottom: 9px;
   }
 }
