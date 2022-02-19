@@ -1,0 +1,9 @@
+.popup__zoom {
+  position: relative;
+  max-width: 75vw;
+  max-height: 75vh;
+  align-self: center;
+  min-height: 299px;
+}
+
+
