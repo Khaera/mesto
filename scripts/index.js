@@ -104,9 +104,9 @@ function closePopUp(popup) {
 
 //функция закрытия попапа при нажатии на крестик
 popUpCloseButtons.forEach( function(item) {
-  const popUp = item.closest('.popup');
+  const popUpWindow = item.closest('.popup');
   item.addEventListener('click', function() {
-    closePopUp(popUp);
+    closePopUp(popUpWindow);
   });
 });
 
