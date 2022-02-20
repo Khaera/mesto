@@ -104,21 +104,21 @@ function closePopUp(popup) {
 
 //функция закрытия попапа при нажатии на крестик
 popUpCloseButtons.forEach( function(item) {
-  const CloseButton = item.closest('.popup');
+  const popUp = item.closest('.popup');
   item.addEventListener('click', function() {
-    closePopUp(CloseButton);
+    closePopUp(popUp);
   });
 });
 
 //отправка формы попапа добавления карточек
-function cardSubmit(evt) {
+function handleSubmitCardForm(evt) {
   evt.preventDefault();
-  addNewCard(placeInput.value, linkInput.value)
+  addNewCard(placeInput.value, linkInput.value);
   closePopUp(popUpCard);
 }
 
 //отправка формы редактирования информации профиля
-function formSubmitHandler (evt) {
+function handleSubmitProfileForm (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileCareer.textContent = careerInput.value;
@@ -140,6 +140,6 @@ function deleteCard(event) {
 //события, при нажатии на кнопки
 editButton.addEventListener('click', openPopUpProfile);
 addButton.addEventListener('click', openPopUpCard);
-popUpFormProfile.addEventListener('submit', formSubmitHandler);
-popUpFormCard.addEventListener('submit', cardSubmit);
+popUpFormProfile.addEventListener('submit', handleSubmitProfileForm);
+popUpFormCard.addEventListener('submit', handleSubmitCardForm);
 addCardArray(); // вызов функции добавления карточек из массива
