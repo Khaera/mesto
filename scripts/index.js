@@ -92,9 +92,6 @@ function openPopUpCard() {
   openPopUp(popUpCard)
 }
 
-//функция открытия попапа просмотра изображений
-
-
 
 //закрытие попапа
 function closePopUp(popup) {
