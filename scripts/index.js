@@ -2,8 +2,8 @@ const popUps = document.querySelectorAll('.popup');
 
 //переменные попапа редактирования инфы профиля
 const popUpProfile = document.querySelector('.profile-popup');
-const nameInput = popUpProfile.querySelector('.popup__info_edit_name');
-const careerInput = popUpProfile.querySelector('.popup__info_edit_career');
+const nameInput = popUpProfile.querySelector('.popup__input_edit_name');
+const careerInput = popUpProfile.querySelector('.popup__input_edit_career');
 const profileContainer = document.querySelector('.profile');
 const editButton = profileContainer.querySelector('.profile__edit-button');
 const profileName = profileContainer.querySelector('.profile__name');
@@ -13,8 +13,8 @@ const popUpFormProfile = popUpProfile.querySelector('.popup__form');
 //переменные попапа добавления карточек
 const addButton = document.querySelector('.profile__add-button')
 const popUpCard = document.querySelector('.card-popup');
-const placeInput = popUpCard.querySelector('.popup__info_edit_place');
-const linkInput = popUpCard.querySelector('.popup__info_edit_link');
+const placeInput = popUpCard.querySelector('.popup__input_edit_place');
+const linkInput = popUpCard.querySelector('.popup__input_edit_link');
 const popUpFormCard = popUpCard.querySelector('.popup__form');
 
 //переменная попапа открытия изображений
