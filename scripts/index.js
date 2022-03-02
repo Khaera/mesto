@@ -1,3 +1,5 @@
+const popUps = document.querySelectorAll('.popup');
+
 //переменные попапа редактирования инфы профиля
 const popUpProfile = document.querySelector('.profile-popup');
 const nameInput = popUpProfile.querySelector('.popup__info_edit_name');
@@ -75,6 +77,7 @@ function addNewCard() {
 //функция открытия попапов
 function openPopUp(popup) {
   popup.classList.add('popup_opened');
+  closePopUpKeyEscape();
 }
 
 //функция открытия попапа редактирования профиля
@@ -87,15 +90,21 @@ function openPopUpProfile() {
 
 //функция открытия попапа добавления карточек
 function openPopUpCard() {
-  placeInput.value = "";
-  linkInput.value = "";
-  openPopUp(popUpCard)
+  resetInputsFormCard();
+  openPopUp(popUpCard);
+
 }
 
+//функция очистки полей формы добавления карточек
+
+function resetInputsFormCard() {
+  popUpFormCard.reset();
+}
 
 //закрытие попапа
 function closePopUp(popup) {
   popup.classList.remove('popup_opened');
+  removeKeyEscape();
 }
 
 
@@ -106,6 +115,33 @@ popUpCloseButtons.forEach( function(item) {
     closePopUp(popUpWindow);
   });
 });
+
+//функция закрытия попапа при нажатии на Esc
+function closeKeyEscape (evt) {
+  if (evt.key === 'Escape') {
+    const openedPopUp = document.querySelector('.popup_opened');
+    closePopUp(openedPopUp);
+  }
+}
+
+function closePopUpKeyEscape() {
+  document.addEventListener('keydown', closeKeyEscape);
+}
+
+function removeKeyEscape() {
+  document.removeEventListener('keydown', closeKeyEscape);
+}
+
+//закрытие попапа при нажатии на оверлей
+
+popUps.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopUp(popup)
+    }
+  })
+})
+
 
 //отправка формы попапа добавления карточек
 function handleSubmitCardForm(evt) {
