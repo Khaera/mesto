@@ -35,8 +35,9 @@ const checkFormValidity = (formElement, inputElement) => {
   }
 };
 
+
 //функция дизейбла кнопки отправить
-const disableSubmitButton = (inputList, submitButton) => {
+const toggleButtonState = (inputList, submitButton) => {
 
   //получаем невалидный инпут из списка всех инпутов
   const hasInvalidInput = Array.from(inputList).some((inputElement => {
@@ -60,10 +61,10 @@ const setEventListeners = (formElement) => {
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', (event) => {
       checkFormValidity(formElement, inputElement);
-      disableSubmitButton(inputList, submitButton);
+      toggleButtonState(inputList, submitButton);
     });
   });
-  disableSubmitButton(inputList, submitButton);
+  toggleButtonState(inputList, submitButton);
 };
 
 //объект настроек валидации

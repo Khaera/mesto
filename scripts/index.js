@@ -1,5 +1,7 @@
 const popUps = document.querySelectorAll('.popup');
 
+const submitButton = document.querySelector('.popup__save-button');
+
 //переменные попапа редактирования инфы профиля
 const popUpProfile = document.querySelector('.profile-popup');
 const nameInput = popUpProfile.querySelector('.popup__input_edit_name');
@@ -39,28 +41,36 @@ function createCard(cardInfo) {
   newElementTitle.textContent = cardInfo.name;
   newElement.querySelector('.element__like').addEventListener('click', likeCard);
   newElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  newElementImage.addEventListener('click', () => openPopUpImage(cardInfo));
+  newElementImage.addEventListener('click', openPopUpImage);
   return newElement;
+}
 
-  function openPopUpImage(cardInfo) {
-    imageOpen.src = newElementImage.src;
-    imageOpen.alt = newElementImage.alt;
-    captionImage.textContent = newElementImage.alt;
+//функция открытия попапа картинок
+function openPopUpImage(evt) {
+  if (evt.target.classList.contains('element__image')) {
+    const caption = evt.target.closest('.element').querySelector('.element__title').textContent;
+    const imageLink = evt.target.src;
+    imageOpen.src = imageLink;
+    imageOpen.alt = caption;
+    captionImage.textContent = caption;
     openPopUp(popUpImage);
   }
 }
 
-
 //добавление карточек из массивая
 function addCardArray() {
   initialCards.forEach((item) => {
-    renderCard(createCard(item));
+    renderCard(createCard(item), cardsList, true);
   });
 };
 
 
-function renderCard(element) {
-  cardsList.prepend(element);
+function renderCard(element, container, toBeginning = true) {
+  if (toBeginning === true) {
+    cardsList.prepend(element); //карточки будут вставляться в начало
+  } else {
+    cardsList.append(element);
+  }
 };
 
 
@@ -84,7 +94,7 @@ function openPopUp(popup) {
 function openPopUpProfile() {
   nameInput.value = profileName.textContent;  //добавления имени из данных профиля в поле ввода формы
   careerInput.value = profileCareer.textContent;   //добавления рода деятельности из данных профиля в поле ввода формы
-  openPopUp(popUpProfile)
+  openPopUp(popUpProfile);
 }
 
 
@@ -99,6 +109,7 @@ function openPopUpCard() {
 
 function resetInputsFormCard() {
   popUpFormCard.reset();
+
 }
 
 //закрытие попапа
