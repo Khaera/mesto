@@ -39,10 +39,10 @@ function createCard(cardInfo) {
   newElementTitle.textContent = cardInfo.name;
   newElement.querySelector('.element__like').addEventListener('click', likeCard);
   newElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  newElementImage.addEventListener('click', () => openPopUpImage(newElementImage));
+  newElementImage.addEventListener('click', () => openPopUpImage(cardInfo));
   return newElement;
 
-  function openPopUpImage(newElementImage) {
+  function openPopUpImage(cardInfo) {
     imageOpen.src = newElementImage.src;
     imageOpen.alt = newElementImage.alt;
     captionImage.textContent = newElementImage.alt;
