@@ -3,7 +3,7 @@ const popUps = document.querySelectorAll('.popup');
 const submitButton = document.querySelector('.popup__save-button');
 
 //переменные попапа редактирования инфы профиля
-const popUpProfile = document.querySelector('.profile-popup');
+const popUpProfile = document.querySelector('.popup_type_profile');
 const nameInput = popUpProfile.querySelector('.popup__input_edit_name');
 const careerInput = popUpProfile.querySelector('.popup__input_edit_career');
 const profileContainer = document.querySelector('.profile');
@@ -14,13 +14,13 @@ const popUpFormProfile = popUpProfile.querySelector('.popup__form');
 
 //переменные попапа добавления карточек
 const addButton = document.querySelector('.profile__add-button')
-const popUpCard = document.querySelector('.card-popup');
+const popUpCard = document.querySelector('.popup_type_card-add');
 const placeInput = popUpCard.querySelector('.popup__input_edit_place');
 const linkInput = popUpCard.querySelector('.popup__input_edit_link');
 const popUpFormCard = popUpCard.querySelector('.popup__form');
 
 //переменная попапа открытия изображений
-const popUpImage = document.querySelector('.image-zoom-popup');
+const popUpImage = document.querySelector('.popup_type_picture');
 const imageOpen = popUpImage.querySelector('.popup__image');
 const captionImage = popUpImage.querySelector('.popup__caption');
 
@@ -55,7 +55,7 @@ function openPopUpImage(evt) {
     captionImage.textContent = caption;
     openPopUp(popUpImage);
   }
-}
+};
 
 //добавление карточек из массивая
 function addCardArray() {
@@ -95,28 +95,26 @@ function openPopUpProfile() {
   nameInput.value = profileName.textContent;  //добавления имени из данных профиля в поле ввода формы
   careerInput.value = profileCareer.textContent;   //добавления рода деятельности из данных профиля в поле ввода формы
   openPopUp(popUpProfile);
-}
+};
 
 
 //функция открытия попапа добавления карточек
 function openPopUpCard() {
   resetInputsFormCard();
   openPopUp(popUpCard);
-
-}
+};
 
 //функция очистки полей формы добавления карточек
 
 function resetInputsFormCard() {
   popUpFormCard.reset();
-
-}
+};
 
 //закрытие попапа
 function closePopUp(popup) {
   popup.classList.remove('popup_opened');
   removeKeyEscape();
-}
+};
 
 
 //функция закрытия попапа при нажатии на крестик
@@ -133,15 +131,15 @@ function closeKeyEscape (evt) {
     const openedPopUp = document.querySelector('.popup_opened');
     closePopUp(openedPopUp);
   }
-}
+};
 
 function closePopUpKeyEscape() {
   document.addEventListener('keydown', closeKeyEscape);
-}
+};
 
 function removeKeyEscape() {
   document.removeEventListener('keydown', closeKeyEscape);
-}
+};
 
 //закрытие попапа при нажатии на оверлей
 
@@ -149,9 +147,9 @@ popUps.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
       closePopUp(popup)
-    }
-  })
-})
+    };
+  });
+});
 
 
 //отправка формы попапа добавления карточек
