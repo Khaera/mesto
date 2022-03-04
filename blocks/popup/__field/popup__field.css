@@ -1,14 +1,13 @@
 .popup__field {
-  margin-bottom: 30px;
   max-width: 358px;
 }
 
 .popup__field:last-of-type {
-  margin-bottom: 48px;
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 767px) {
   .popup__field:last-of-type {
-    margin-bottom: 45px;
+    margin-bottom: 4px;
   }
 }
