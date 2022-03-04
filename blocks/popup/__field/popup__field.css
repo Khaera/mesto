@@ -1,5 +1,6 @@
 .popup__field {
   margin-bottom: 30px;
+  max-width: 358px;
 }
 
 .popup__field:last-of-type {

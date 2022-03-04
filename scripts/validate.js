@@ -1,6 +1,8 @@
 //функция показа ошибки
-const showError = (formElement, inputElement, errorMessage) => {
+const showError = (inputElement, errorMessage) => {
+  //переменная элемента ошибки
   const errorElement = inputElement.closest('.popup__field').querySelector('.popup__input-error');
+
 
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__input-error_active');
@@ -8,8 +10,9 @@ const showError = (formElement, inputElement, errorMessage) => {
 };
 
 //функция скрытия ошибки
-const hideError = (formElement, inputElement) => {
+const hideError = (inputElement) => {
   const errorElement = inputElement.closest('.popup__field').querySelector('.popup__input-error');
+
 
   errorElement.textContent = '';
   errorElement.classList.remove('popup__input-error_active');
@@ -17,42 +20,74 @@ const hideError = (formElement, inputElement) => {
 };
 
 //функция проверки валидности инпута формы
-const checkValidity = (formElement, inputElement) => {
-  console.log(inputElement.validity);
-  const isInputNotValid = !inputElement.validity.valid;
+const checkFormValidity = (formElement, inputElement) => {
+  //переменная невалидного инпута
+  const isInputInvalid = !inputElement.validity.valid;
 
-  if (isInputNotValid) {
+  //условная конструкция, принимающая на вход невалидный инпут. показывает/скрывает ошибку
+  if (isInputInvalid) {
+    //переменная сообщения ошибки с дефолтным текстом ошибки браузера
     const errorMessage = inputElement.validationMessage;
 
-
-    showError(formElement, inputElement, errorMessage);
+    showError(inputElement, errorMessage);
   } else {
-    hideError(formElement, inputElement);
+    hideError(inputElement);
   }
 };
 
-const setEventListeners = (formElement) => {
-  const inputList = formElement.querySelectorAll('.popup__input');
+//функция дизейбла кнопки отправить
+const disableSubmitButton = (inputList, submitButton) => {
 
+  //получаем невалидный инпут из списка всех инпутов
+  const hasInvalidInput = Array.from(inputList).some((inputElement => {
+    return !inputElement.validity.valid;
+  }));
+
+  //условная конструкция, проверяющая валидный или невалидный инпут.
+  if (hasInvalidInput) {
+    submitButton.classList.add('popup__save-button_disabled');//добавляет класс кнопке
+    submitButton.setAttribute('disabled', true); //добавляет атрибут disabled в html разметку кнопке
+  } else {
+    submitButton.classList.remove('popup__save-button_disabled');
+    submitButton.removeAttribute('disabled');
+  }
+};
+
+//функция устанавливающая список событий на все инпуты
+const setEventListeners = (formElement) => {
+  const inputList = formElement.querySelectorAll('.popup__input'); //переменная списка инпутов
+  const submitButton = formElement.querySelector('.popup__save-button'); //переменная кнопки отправки формы
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', (event) => {
-      console.log(event.target.name, event.target.value);
+      checkFormValidity(formElement, inputElement);
+      disableSubmitButton(inputList, submitButton);
+    });
+  });
+  disableSubmitButton(inputList, submitButton);
+};
 
-      checkValidity(formElement, inputElement);
-    })
-  })
-}
+//объект настроек валидации
+const objectValidation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input-error',
+  errorClass: 'popup__error_visible',
+};
 
-const enableValidation = () => {
-  const formsList = Array.from(document.querySelectorAll('.popup__form'));
+//функция включения валидации, принимающая на вход объект настроек.
+const enableValidation = (objectValidation) => {
+  const formsList = [...document.querySelectorAll(objectValidation.formSelector)];
 
   formsList.forEach(formElement => {
     formElement.addEventListener('submit', (event) => {
       event.preventDefault();
     });
-
     setEventListeners(formElement);
   });
 };
 
-enableValidation();
+
+enableValidation(objectValidation);
+
