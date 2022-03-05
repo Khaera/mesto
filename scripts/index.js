@@ -1,7 +1,5 @@
 const popUps = document.querySelectorAll('.popup');
 
-const submitButton = document.querySelector('.popup__save-button');
-
 //переменные попапа редактирования инфы профиля
 const popUpProfile = document.querySelector('.popup_type_profile');
 const nameInput = popUpProfile.querySelector('.popup__input_edit_name');
@@ -95,6 +93,7 @@ function openPopUpProfile() {
   nameInput.value = profileName.textContent;  //добавления имени из данных профиля в поле ввода формы
   careerInput.value = profileCareer.textContent;   //добавления рода деятельности из данных профиля в поле ввода формы
   openPopUp(popUpProfile);
+  checkActualValidation(popUpProfile);
 };
 
 
@@ -102,6 +101,7 @@ function openPopUpProfile() {
 function openPopUpCard() {
   resetInputsFormCard();
   openPopUp(popUpCard);
+  checkActualValidation(popUpCard);
 };
 
 //функция очистки полей формы добавления карточек
