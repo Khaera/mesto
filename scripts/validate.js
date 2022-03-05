@@ -34,7 +34,7 @@ const checkFormValidity = (formElement, inputElement, rest) => {
 };
 
 
-//функция дизейбла кнопки отправить
+//функция переключения состояния кнопки отправить
 const toggleButtonState = (inputList, submitButtonElement, {inactiveButtonClass}) => {
 
   //получаем невалидный инпут из списка всех инпутов
@@ -53,23 +53,6 @@ const toggleButtonState = (inputList, submitButtonElement, {inactiveButtonClass}
 };
 
 
-//функция проверка валидности попапа (вызывается при его открытии)
-const checkActualValidation = (popup) => {
-  const inputList = Array.from(popup.querySelectorAll('.popup__input'));
-
-  const submitButtonElement = popup.querySelector('.popup__save-button');
-
-  inputList.forEach((inputElement) => {
-
-    if (inputElement.validity.valid) {
-      hideError(popup, inputElement, {inputErrorClass: 'popup__input_invalid', errorClass: 'popup__input-error_active'});
-    }
-
-    toggleButtonState(inputList, submitButtonElement, {inactiveButtonClass: 'popup__save-button_disabled'});
-  })
-}
-
-
 //функция устанавливающая список событий на все инпуты
 const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...rest}) => {
 
@@ -84,6 +67,24 @@ const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ..
     });
   });
 };
+
+//функция проверка валидности попапа (вызывается при его открытии)
+const checkActualValidation = (popup) => {
+  //получаем список инпутов
+  const inputList = Array.from(popup.querySelectorAll('.popup__input'));
+
+  const submitButtonElement = popup.querySelector('.popup__save-button');
+
+  inputList.forEach((inputElement) => {
+
+    //прорка валидности инпута и если валидно, ошибка скрывается.
+    if (inputElement.validity.valid) {
+      hideError(popup, inputElement, {inputErrorClass: 'popup__input_invalid', errorClass: 'popup__input-error_active'});
+    }
+
+    toggleButtonState(inputList, submitButtonElement, {inactiveButtonClass: 'popup__save-button_disabled'});
+  })
+}
 
 
 //функция включения валидации, принимающая на вход объект настроек.
