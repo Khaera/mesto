@@ -93,7 +93,7 @@ function openPopUpProfile() {
   nameInput.value = profileName.textContent;  //добавления имени из данных профиля в поле ввода формы
   careerInput.value = profileCareer.textContent;   //добавления рода деятельности из данных профиля в поле ввода формы
   openPopUp(popUpProfile);
-  checkActualValidation(popUpProfile);
+  checkActualValidation(popUpProfile, configValidation);
 };
 
 
@@ -101,7 +101,7 @@ function openPopUpProfile() {
 function openPopUpCard() {
   resetInputsFormCard();
   openPopUp(popUpCard);
-  checkActualValidation(popUpCard);
+  checkActualValidation(popUpCard, configValidation);
 };
 
 //функция очистки полей формы добавления карточек

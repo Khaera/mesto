@@ -69,11 +69,11 @@ const setEventListeners = (formElement, configValidation) => {
 };
 
 //функция проверка валидности попапа (вызывается при его открытии)
-const checkActualValidation = (popup) => {
+const checkActualValidation = (popup, configValidation) => {
   //получаем список инпутов
-  const inputList = Array.from(popup.querySelectorAll('.popup__input'));
+  const inputList = Array.from(popup.querySelectorAll(configValidation.inputSelector));
 
-  const submitButtonElement = popup.querySelector('.popup__save-button');
+  const submitButtonElement = popup.querySelector(configValidation.submitButtonSelector);
 
   inputList.forEach((inputElement) => {
 
@@ -94,6 +94,7 @@ const enableValidation = (configValidation) => {
     setEventListeners(form, configValidation);
   });
 };
+
 
 //объект настроек валидации формы
 const configValidation = {
