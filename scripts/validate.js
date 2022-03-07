@@ -1,5 +1,5 @@
 //функция показа ошибки
-const showError = (formElement, inputElement, errorMessage, configValidation) => {
+const showError = (formElement, inputElement, errorMessage, config) => {
   //переменная элемента ошибки
   const errorElement = inputElement.closest('.popup__field').querySelector('.popup__input-error');
 
@@ -9,7 +9,7 @@ const showError = (formElement, inputElement, errorMessage, configValidation) =>
 };
 
 //функция скрытия ошибки
-const hideError = (formElement, inputElement, configValidation) => {
+const hideError = (formElement, inputElement, config) => {
   const errorElement = inputElement.closest('.popup__field').querySelector('.popup__input-error');
 
   errorElement.textContent = '';
@@ -18,7 +18,7 @@ const hideError = (formElement, inputElement, configValidation) => {
 };
 
 //функция проверки валидности инпута формы
-const checkFormValidity = (formElement, inputElement, configValidation) => {
+const checkFormValidity = (formElement, inputElement, config) => {
   //переменная невалидного инпута
   const isInputInvalid = !inputElement.validity.valid;
 
@@ -35,7 +35,7 @@ const checkFormValidity = (formElement, inputElement, configValidation) => {
 
 
 //функция переключения состояния кнопки отправить
-const toggleButtonState = (inputList, submitButtonElement, configValidation) => {
+const toggleButtonState = (inputList, submitButtonElement, config) => {
 
   //получаем невалидный инпут из списка всех инпутов
   const hasInvalidInput = Array.from(inputList).some((inputElement => {
@@ -54,7 +54,7 @@ const toggleButtonState = (inputList, submitButtonElement, configValidation) => 
 
 
 //функция устанавливающая список событий на все инпуты
-const setEventListeners = (formElement, configValidation) => {
+const setEventListeners = (formElement, config) => {
 
   const inputList = Array.from(formElement.querySelectorAll(configValidation.inputSelector)); //переменная списка инпутов
 
@@ -69,7 +69,7 @@ const setEventListeners = (formElement, configValidation) => {
 };
 
 //функция проверка валидности попапа (вызывается при его открытии)
-const checkActualValidation = (popup, configValidation) => {
+const checkActualValidation = (popup, config) => {
   //получаем список инпутов
   const inputList = Array.from(popup.querySelectorAll(configValidation.inputSelector));
 
@@ -88,7 +88,7 @@ const checkActualValidation = (popup, configValidation) => {
 
 
 //функция включения валидации, принимающая на вход объект настроек.
-const enableValidation = (configValidation) => {
+const enableValidation = (config) => {
   const formsList = Array.from(document.querySelectorAll(configValidation.formSelector));
   formsList.forEach(form => {
     setEventListeners(form, configValidation);
