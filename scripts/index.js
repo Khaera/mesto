@@ -1,3 +1,35 @@
+import { Card } from './Card.js';
+
+export {openPopUp};
+//переменная массива карточек - вынесена в отдельный файл для удобства чтения кода
+const initialCards = [
+  {
+    name: 'Москва',
+    link: './images/moscow.jpg'
+  },
+  {
+    name: 'Владивосток',
+    link: './images/vladivostok.jpg'
+  },
+  {
+    name: 'Тулиновка',
+    link: './images/tulinovka.jpg'
+  },
+  {
+    name: 'Санкт-Петербург',
+    link: './images/saint-petersburg.jpg'
+  },
+  {
+    name: 'Краснодарский край',
+    link: './images/krasnodarskiy-kray.jpg'
+  },
+  {
+    name: 'Остров Ольхон',
+    link: './images/olkhon-island.jpg'
+  }
+];
+
+
 const popUps = document.querySelectorAll('.popup');
 
 //переменные попапа редактирования инфы профиля
@@ -17,70 +49,27 @@ const placeInput = popUpCard.querySelector('.popup__input_edit_place');
 const linkInput = popUpCard.querySelector('.popup__input_edit_link');
 const popUpFormCard = popUpCard.querySelector('.popup__form');
 
-//переменная попапа открытия изображений
-const popUpImage = document.querySelector('.popup_type_picture');
-const imageOpen = popUpImage.querySelector('.popup__image');
-const captionImage = popUpImage.querySelector('.popup__caption');
-
 //переменная кнопок закрытия
-const popUpCloseButtons = document.querySelectorAll('.popup__close-button')
-
-//переменные template карточек
-const cardTemplate = document.querySelector('#card-template').content;
+const popUpCloseButtons = document.querySelectorAll('.popup__close-button');
 const cardsList = document.querySelector('.elements__list');
 
-//функция отображения карточек
-function createCard(cardInfo) {
-  const newElement = cardTemplate.querySelector('.element').cloneNode(true);
-  const newElementImage = newElement.querySelector('.element__image');
-  const newElementTitle = newElement.querySelector('.element__title');
-  newElementImage.src = cardInfo.link;
-  newElementImage.alt = cardInfo.name;
-  newElementTitle.textContent = cardInfo.name;
-  newElement.querySelector('.element__like').addEventListener('click', likeCard);
-  newElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  newElementImage.addEventListener('click', openPopUpImage);
-  return newElement;
-}
-
-//функция открытия попапа картинок
-function openPopUpImage(evt) {
-  if (evt.target.classList.contains('element__image')) {
-    const caption = evt.target.closest('.element').querySelector('.element__title').textContent;
-    const imageLink = evt.target.src;
-    imageOpen.src = imageLink;
-    imageOpen.alt = caption;
-    captionImage.textContent = caption;
-    openPopUp(popUpImage);
-  }
-};
 
 //добавление карточек из массивая
-function addCardArray() {
-  initialCards.forEach((item) => {
-    renderCard(createCard(item), cardsList, true);
+function addCardsFromArray() {
+  initialCards.forEach((data) => {
+    const card = new Card(data.name, data.link, '#card-template');
+    const newCardFromTemplate = card.generateCard();
+    cardsList.append(newCardFromTemplate);
   });
-};
+}
 
-
-function renderCard(element, container, toBeginning = true) {
-  if (toBeginning === true) {
-    cardsList.prepend(element); //карточки будут вставляться в начало
-  } else {
-    cardsList.append(element);
+  function addCardManual() {
+    const card = new Card(placeInput.value, linkInput.value, '#card-template');
+    const newCardFromTemplate = card.generateCard();
+    cardsList.prepend(newCardFromTemplate);
+    resetInputsFormCard();
+    closePopUp(popUpCard);
   }
-};
-
-
-//функция добавления новой карточки
-function addNewCard() {
-  const cardInfo = {
-    name: placeInput.value,
-    link: linkInput.value,
-  };
-  renderCard(createCard(cardInfo));
-};
-
 
 //функция открытия попапов
 function openPopUp(popup) {
@@ -118,7 +107,7 @@ function closePopUp(popup) {
 
 
 //функция закрытия попапа при нажатии на крестик
-popUpCloseButtons.forEach( function(item) {
+popUpCloseButtons.forEach((item) => {
   const popUpWindow = item.closest('.popup');
   item.addEventListener('click', function() {
     closePopUp(popUpWindow);
@@ -155,7 +144,7 @@ popUps.forEach((popup) => {
 //отправка формы попапа добавления карточек
 function handleSubmitCardForm(evt) {
   evt.preventDefault();
-  addNewCard(placeInput.value, linkInput.value);
+  addCardManual();
   closePopUp(popUpCard);
 }
 
@@ -168,20 +157,10 @@ function handleSubmitProfileForm (evt) {
 }
 
 
-// функция поставить-убрать лайк
-function likeCard(event) {
-  event.target.classList.toggle('element__like_active');
-}
-
-//функция удалить карточку
-function deleteCard(event) {
-  event.target.closest('.element').remove();
-}
-
 
 //события, при нажатии на кнопки
 editButton.addEventListener('click', openPopUpProfile);
 addButton.addEventListener('click', openPopUpCard);
 popUpFormProfile.addEventListener('submit', handleSubmitProfileForm);
 popUpFormCard.addEventListener('submit', handleSubmitCardForm);
-addCardArray(); // вызов функции добавления карточек из массива
+addCardsFromArray();
