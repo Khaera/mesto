@@ -1,4 +1,5 @@
 import { Card } from './Card.js';
+import { CardAddManual } from './Card.js';
 
 export {openPopupTypeImage};
 
@@ -55,15 +56,17 @@ const popupTypeImage = document.querySelector('.popup_type_picture');
 const cardImage = popupTypeImage.querySelector('.popup__image');
 const cardCaption = popupTypeImage.querySelector('.popup__caption');
 
+//все кнопки "крестики"
+const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
-const popupCloseButtons = document.querySelectorAll('.popup__close-button'); //все кнопки "крестики"
+//список карточек (для вставки из массива)
 const cardsList = document.querySelector('.elements__list');
 
 
 //добавление карточек из массивая
 function addCardsFromArray() {
   initialCards.forEach((data) => {
-    const card = new Card(data.name, data.link, '#card-template');
+    const card = new Card(data, '#card-template');
     const cardElement = card.generateCard();
     cardsList.prepend(cardElement);
   });
@@ -71,7 +74,7 @@ function addCardsFromArray() {
 
 //добавление карточки вручную
   function addCardManual() {
-    const card = new Card(placeInput.value, linkInput.value, '#card-template');
+    const card = new CardAddManual(placeInput.value, linkInput.value, '#card-template');
     const cardElement = card.generateCard();
     cardsList.prepend(cardElement);
     resetInputsFormCard();
@@ -172,4 +175,5 @@ editButton.addEventListener('click', openPopupTypeProfile);
 addButton.addEventListener('click', openPopupTypeCard);
 popupFormProfile.addEventListener('submit', handleSubmitProfileForm);
 popupFormCard.addEventListener('submit', handleSubmitCardForm);
-addCardsFromArray();
+
+addCardsFromArray(); //вызов функции добавления карточек из массива
