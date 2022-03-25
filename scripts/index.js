@@ -1,6 +1,7 @@
 import { Card } from './Card.js';
 
-export {openPopup};
+export {openPopupTypeImage};
+
 //переменная массива карточек - вынесена в отдельный файл для удобства чтения кода
 const initialCards = [
   {
@@ -99,7 +100,7 @@ function openPopupTypeCard() {
 };
 
 //функция открытия попапа, увеличивающего изображения. экспортируется сразу при создании
-export function openPopupTypeImage(name, link) {
+function openPopupTypeImage(name, link) {
   cardImage.src = link;
   cardImage.alt = name;
   cardCaption.textContent = name;
