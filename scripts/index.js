@@ -1,9 +1,10 @@
 import { Card } from './Card.js';
 import { CardAddManual } from './Card.js';
+import { FormValidator } from './FormValidator.js';
 
-export {openPopupTypeImage};
+export {openPopupTypeImage}; //экспорт функции открытия попапа картинок в Card.js
 
-//переменная массива карточек - вынесена в отдельный файл для удобства чтения кода
+//массив карточек
 const initialCards = [
   {
     name: 'Москва',
@@ -14,8 +15,8 @@ const initialCards = [
     link: './images/vladivostok.jpg'
   },
   {
-    name: 'Тулиновка',
-    link: './images/tulinovka.jpg'
+    name: 'Дагестан',
+    link: './images/dagestan.jpg'
   },
   {
     name: 'Санкт-Петербург',
@@ -30,6 +31,16 @@ const initialCards = [
     link: './images/olkhon-island.jpg'
   }
 ];
+
+//объект настроек валидации
+const configValidation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_invalid',
+  errorClass: 'popup__input-error_active',
+};
 
 //все попапы
 const popups = document.querySelectorAll('.popup');
@@ -62,7 +73,6 @@ const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 //список карточек (для вставки из массива)
 const cardsList = document.querySelector('.elements__list');
 
-
 //добавление карточек из массивая
 function addCardsFromArray() {
   initialCards.forEach((data) => {
@@ -77,8 +87,6 @@ function addCardsFromArray() {
     const card = new CardAddManual(placeInput.value, linkInput.value, '#card-template');
     const cardElement = card.generateCard();
     cardsList.prepend(cardElement);
-    resetInputsFormCard();
-    closePopup(popupTypeCard);
   }
 
 //функция открытия попапов
@@ -92,14 +100,13 @@ function openPopupTypeProfile() {
   nameInput.value = profileName.textContent;  //добавления имени из данных профиля в поле ввода формы
   careerInput.value = profileCareer.textContent;   //добавления рода деятельности из данных профиля в поле ввода формы
   openPopup(popupTypeProfile);
-  checkActualValidation(popupTypeProfile, configValidation);
 };
 
 //функция открытия попапа добавления карточек
 function openPopupTypeCard() {
   resetInputsFormCard();
   openPopup(popupTypeCard);
-  checkActualValidation(popupTypeCard, configValidation);
+  validateFormAddCard.toggleButtonState(); // отключение кнопки отправки при открытии
 };
 
 //функция открытия попапа, увеличивающего изображения. экспортируется сразу при создании
@@ -108,6 +115,7 @@ function openPopupTypeImage(name, link) {
   cardImage.alt = name;
   cardCaption.textContent = name;
   openPopup(popupTypeImage);
+
   };
 
 //функция очистки полей формы добавления карточек
@@ -124,9 +132,9 @@ function closePopup(popup) {
 
 //функция закрытия попапа при нажатии на крестик
 popupCloseButtons.forEach((item) => {
-  const popupWindow = item.closest('.popup');
+  const popup = item.closest('.popup');
   item.addEventListener('click', function() {
-    closePopup(popupWindow);
+    closePopup(popup);
   });
 });
 
@@ -169,6 +177,12 @@ function handleSubmitProfileForm (evt) {
   profileCareer.textContent = careerInput.value;
   closePopup(popupTypeProfile);
 }
+
+//добавление валидации форм через конструктор
+const validateFormEditProfile = new FormValidator(configValidation, popupFormProfile);
+validateFormEditProfile.enableValidation();
+const validateFormAddCard = new FormValidator(configValidation, popupFormCard);
+validateFormAddCard.enableValidation();
 
 //события, при нажатии на кнопки
 editButton.addEventListener('click', openPopupTypeProfile);

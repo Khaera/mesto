@@ -1,7 +1,10 @@
+//импортируем функцию открытия попапа картинок
 import { openPopupTypeImage } from "./index.js";
+
 export { Card };
 export { CardAddManual };
 
+//создаем класс создания карточек
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -9,6 +12,7 @@ class Card {
     this._cardSelector = cardSelector;
   }
 
+  //шаблон карточки
   _getTemplate() {
     const cardElement = document.querySelector('#card-template')
     .content
@@ -29,6 +33,7 @@ class Card {
     this._element.querySelector('.element__delete-button').closest('li').remove(); //находит ближайший li и удаляет
   }
 
+  //добавляем события
   _setEventListeners() {
     this._element.querySelector('.element__like').addEventListener('click', () => {
       this._likeCard();
@@ -43,6 +48,7 @@ class Card {
     });
   }
 
+  //создание карточки
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector('.element__image').src = this._link;
@@ -53,6 +59,7 @@ class Card {
   }
 }
 
+//класс создания карточки вручную
 class CardAddManual extends Card {
   constructor(name, link, cardSelector) {
     super(cardSelector);
