@@ -72,12 +72,12 @@ const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 //список карточек (для вставки из массива)
 const cardsList = document.querySelector('.elements__list');
 
-//создание карточек в начало или конец в зависимости от условия
-function createCard(cardElement, toBeginning = true) {
-  if (toBeginning === true) {
-    cardsList.prepend(cardElement); //карточки будут вставляться в начало
+//создание карточки в начало или конец
+function createCard(element, container, toBeginning = true) { //дефолтное значение для упрощения использования
+  if (toBeginning) {
+    return container.prepend(element); //карточки будут вставляться в начало контейнера
   } else {
-    cardsList.append(cardElement);
+    return container.append(element);
   }
 };
 
@@ -86,15 +86,15 @@ function addCardsFromArray() {
   initialCards.forEach((data) => {
     const card = new Card(data.name, data.link, '#card-template');
     const cardElement = card.generateCard();
-    createCard(cardElement);
+    createCard(cardElement, cardsList);
   });
 }
 
 //добавление карточки вручную
-  function addCardManual() {
-    const card = new Card(placeInput.value, linkInput.value, '#card-template');
-    const cardElement = card.generateCard();
-    createCard(cardElement);
+function addCardManual() {
+  const card = new Card(placeInput.value, linkInput.value, '#card-template');
+  const cardElement = card.generateCard();
+  createCard(cardElement, cardsList);
   }
 
 //функция открытия попапов
@@ -123,8 +123,7 @@ function openPopupTypeImage(name, link) {
   cardImage.alt = name;
   cardCaption.textContent = name;
   openPopup(popupTypeImage);
-
-  };
+};
 
 //функция очистки полей формы добавления карточек
 function resetInputsFormCard() {
@@ -136,7 +135,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   removeKeyEscape();
 };
-
 
 //функция закрытия попапа при нажатии на крестик
 popupCloseButtons.forEach((item) => {

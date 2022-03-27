@@ -30,7 +30,7 @@ class Card {
 
   _handleDeleteCard(evt) {
     this._element.remove(); //удаляет карточку
-    this._element = null; //удаляет данные о карточске из памяти
+    this._element = null; //удаляет данные о карточке из памяти
   }
 
   //добавляем события
@@ -63,7 +63,6 @@ class Card {
     this._elementTitle.textContent = this._name;
 
     this._setEventListeners();
-
     return this._element;
   }
 }
