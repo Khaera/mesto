@@ -2,13 +2,12 @@
 import { openPopupTypeImage } from "./index.js";
 
 export { Card };
-export { CardAddManual };
 
 //создаем класс создания карточек
 class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name;
-    this._link = data.link;
+  constructor(name, link, cardSelector) {
+    this._name = name;
+    this._link = link;
     this._cardSelector = cardSelector;
   }
 
@@ -25,54 +24,46 @@ class Card {
     openPopupTypeImage(this._name, this._link);
   }
 
-  _likeCard() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+  _handleLikeCard(evt) {
+    this._likeButton.classList.toggle('element__like_active');
   }
 
-  _deleteCard() {
-    this._element.querySelector('.element__delete-button').closest('li').remove(); //находит ближайший li и удаляет
+  _handleDeleteCard(evt) {
+    this._element.remove(); //удаляет карточку
+    this._element = null; //удаляет данные о карточске из памяти
   }
 
   //добавляем события
   _setEventListeners() {
-    this._element.querySelector('.element__like').addEventListener('click', () => {
-      this._likeCard();
+    this._likeButton.addEventListener('click', (evt) => {
+      this._handleLikeCard(evt);
     });
 
-    this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-      this._deleteCard();
+    this._deleteButton.addEventListener('click', (evt) => {
+      this._handleDeleteCard(evt);
     });
 
-    this._element.querySelector('.element__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._openPopup();
     });
   }
 
   //создание карточки
   generateCard() {
+    //объявляем классовые переменные
     this._element = this._getTemplate();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._setEventListeners();
-    return this._element;
-  }
-}
+    this._elementTitle = this._element.querySelector('.element__title');
+    this._cardImage = this._element.querySelector('.element__image');
+    this._likeButton = this._element.querySelector('.element__like');
+    this._deleteButton = this._element.querySelector('.element__delete-button');
 
-//класс создания карточки вручную
-class CardAddManual extends Card {
-  constructor(name, link, cardSelector) {
-    super(cardSelector);
-    this._name = name;
-    this._link = link;
-  }
+    //наполняем атрибуты классовых переменных
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._elementTitle.textContent = this._name;
 
-  generateCard() {
-    this._element = this._getTemplate();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
-    this._element.querySelector('.element__title').textContent = this._name;
     this._setEventListeners();
+
     return this._element;
   }
 }
