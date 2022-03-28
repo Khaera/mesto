@@ -69,39 +69,35 @@ const cardCaption = popupTypeImage.querySelector('.popup__caption');
 //все кнопки "крестики"
 const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
-//список карточек (для вставки из массива)
+//элемент, куда мы будем вставлять карточки
 const cardsList = document.querySelector('.elements__list');
 
-//создание карточки в начало или конец
-function createCard(element, container, toBeginning = true) { //дефолтное значение для упрощения использования
-  if (toBeginning) {
-    return container.prepend(element); //карточки будут вставляться в начало контейнера
-  } else {
-    return container.append(element);
-  }
+//создание карточки из класса
+function createCard(name, link, cardSelector) {
+  const card = new Card(name, link, cardSelector);
+  const cardElement = card.generateCard();
+  return cardElement;
 };
 
 //добавление карточек из массивая
 function addCardsFromArray() {
   initialCards.forEach((data) => {
-    const card = new Card(data.name, data.link, '#card-template');
-    const cardElement = card.generateCard();
-    createCard(cardElement, cardsList);
+    const newCard = createCard(data.name, data.link, '#card-template');
+    cardsList.prepend(newCard);
   });
-}
+};
 
 //добавление карточки вручную
 function addCardManual() {
-  const card = new Card(placeInput.value, linkInput.value, '#card-template');
-  const cardElement = card.generateCard();
-  createCard(cardElement, cardsList);
-  }
+  const newCard = createCard(placeInput.value, linkInput.value, '#card-template');
+  cardsList.prepend(newCard);
+};
 
 //функция открытия попапов
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   closePopupKeyEscape();
-}
+};
 
 //функция открытия попапа редактирования профиля
 function openPopupTypeProfile() {
@@ -174,7 +170,7 @@ function handleSubmitCardForm(evt) {
   evt.preventDefault();
   addCardManual();
   closePopup(popupTypeCard);
-}
+};
 
 //отправка формы редактирования информации профиля
 function handleSubmitProfileForm (evt) {
@@ -182,7 +178,7 @@ function handleSubmitProfileForm (evt) {
   profileName.textContent = nameInput.value;
   profileCareer.textContent = careerInput.value;
   closePopup(popupTypeProfile);
-}
+};
 
 //добавление валидации форм через конструктор
 const validateFormEditProfile = new FormValidator(configValidation, popupFormProfile);

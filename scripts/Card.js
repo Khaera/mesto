@@ -13,7 +13,7 @@ class Card {
 
   //шаблон карточки
   _getTemplate() {
-    const cardElement = document.querySelector('#card-template')
+    const cardElement = document.querySelector(this._cardSelector)
     .content
     .querySelector('.element')
     .cloneNode(true);
