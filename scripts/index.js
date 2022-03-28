@@ -88,7 +88,7 @@ function addCardsFromArray() {
 };
 
 //добавление карточки вручную
-function addCardManual() {
+function addCardManually() {
   const newCard = createCard(placeInput.value, linkInput.value, '#card-template');
   cardsList.prepend(newCard);
 };
@@ -168,7 +168,7 @@ popups.forEach((popup) => {
 //отправка формы попапа добавления карточек
 function handleSubmitCardForm(evt) {
   evt.preventDefault();
-  addCardManual();
+  addCardManually();
   closePopup(popupTypeCard);
 };
 
