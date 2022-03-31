@@ -103,13 +103,15 @@ function openPopup(popup) {
 function openPopupTypeProfile() {
   nameInput.value = profileName.textContent;  //добавления имени из данных профиля в поле ввода формы
   careerInput.value = profileCareer.textContent;   //добавления рода деятельности из данных профиля в поле ввода формы
+  validateFormEditProfile.resetErrors(); //сбрасываем показанные ошибки если они были
   openPopup(popupTypeProfile);
 };
 
 //функция открытия попапа добавления карточек
 function openPopupTypeCard() {
   resetInputsFormCard();
-  validateFormAddCard.toggleButtonState(); // отключение кнопки отправки при открытии
+  validateFormAddCard.resetErrors(); //сбрасываем показанные ошибки если они были
+  validateFormAddCard.disableSubmitButton(); //отключаем кнопку отправки формы
   openPopup(popupTypeCard);
 };
 
@@ -129,6 +131,8 @@ function resetInputsFormCard() {
 //закрытие попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  validateFormAddCard._setEventListeners();
+  validateFormEditProfile._setEventListeners();
   removeKeyEscape();
 };
 
