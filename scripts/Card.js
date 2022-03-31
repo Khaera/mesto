@@ -20,7 +20,7 @@ class Card {
     return cardElement;
   }
 
-  _openPopup() {
+  _openPopup(evt) {
     openPopupTypeImage(this._name, this._link);
   }
 
@@ -43,8 +43,8 @@ class Card {
       this._handleDeleteCard(evt);
     });
 
-    this._cardImage.addEventListener('click', () => {
-      this._openPopup();
+    this._cardImage.addEventListener('click', (evt) => {
+      this._openPopup(evt);
     });
   }
 
