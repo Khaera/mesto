@@ -104,6 +104,7 @@ function openPopupTypeProfile() {
   nameInput.value = profileName.textContent;  //добавления имени из данных профиля в поле ввода формы
   careerInput.value = profileCareer.textContent;   //добавления рода деятельности из данных профиля в поле ввода формы
   validateFormEditProfile.resetErrors(); //сбрасываем показанные ошибки если они были
+  validateFormEditProfile.toggleButtonState();
   openPopup(popupTypeProfile);
 };
 

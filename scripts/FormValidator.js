@@ -53,7 +53,7 @@ export class FormValidator {
   }
 
   //переключение состояния кнопки
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput()) {
       this.disableSubmitButton();
     } else {
@@ -67,7 +67,7 @@ export class FormValidator {
     this._submitButtonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._toggleButtonState();
+        this.toggleButtonState();
         this._checkInputValidity(inputElement);
       });
     });
@@ -86,6 +86,5 @@ export class FormValidator {
     this._inputList.forEach((inputElement) => {
         this._hideError(inputElement);
     });
-    this._toggleButtonState();
   }
 }
