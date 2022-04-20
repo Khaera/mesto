@@ -1,27 +1,19 @@
-//импортируем функцию открытия попапа картинок
-import { openPopupTypeImage } from "./index.js";
-
-export { Card };
-
 //создаем класс создания карточек
-class Card {
-  constructor(name, link, cardSelector) {
-    this._name = name;
-    this._link = link;
+export class Card {
+  constructor( {data, handleCardClick}, cardSelector) {
+    this._data = data;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   //шаблон карточки
   _getTemplate() {
-    const cardElement = document.querySelector(this._cardSelector)
+    const cardElement = document
+    .querySelector(this._cardSelector)
     .content
     .querySelector('.element')
     .cloneNode(true);
     return cardElement;
-  }
-
-  _openPopup(evt) {
-    openPopupTypeImage(this._name, this._link);
   }
 
   _handleLikeCard(evt) {
@@ -43,8 +35,8 @@ class Card {
       this._handleDeleteCard(evt);
     });
 
-    this._cardImage.addEventListener('click', (evt) => {
-      this._openPopup(evt);
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick();
     });
   }
 
@@ -58,9 +50,9 @@ class Card {
     this._deleteButton = this._element.querySelector('.element__delete-button');
 
     //наполняем атрибуты классовых переменных
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
-    this._elementTitle.textContent = this._name;
+    this._cardImage.src = this._data.link;
+    this._cardImage.alt = this._data.place;
+    this._elementTitle.textContent = this._data.place;
 
     this._setEventListeners();
     return this._element;
