@@ -25,6 +25,9 @@ const userInfo = new UserInfo( {
   careerSelector: '.profile__career',
 });
 
+//создаём попап открытия изображений
+const popupTypeImage = new PopupWithImage(imagePopup);
+
 //создаём попап редактирования информации профиля
 const popupTypeProfile = new PopupWithForm(profilePopup,
   {
@@ -33,6 +36,43 @@ const popupTypeProfile = new PopupWithForm(profilePopup,
     popupTypeProfile.close();
   }
 });
+
+//функция создания карточки
+function createCard(item) {
+  const card = new Card({
+    data: item,
+    handleCardClick: (place, link) => {
+      popupTypeImage.open(item.place, item.link);
+    }
+  }, '#card-template');
+  return card.generateCard();
+};
+
+//создаём попап добавления карточки
+const popupTypeCard = new PopupWithForm(cardPopup,
+  {
+    handleSubmitForm: (item) => {
+    cards.addItem(createCard(item));
+    popupTypeCard.close();
+  }
+});
+
+//создаём карточки из массива
+const cards = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const newCards = createCard(item);
+    cards.addItem(newCards);
+  }
+}, cardsList);
+
+cards.renderItems(); //отображаем массив карточек на странице
+
+//добавляем валидацию формам
+const validateFormEditProfile = new FormValidator(configValidation, popupFormProfile);
+validateFormEditProfile.enableValidation();
+const validateFormAddCard = new FormValidator(configValidation, popupFormCard);
+validateFormAddCard.enableValidation();
 
 function openPopupTypeProfile() {
   const userData = userInfo.getUserInfo();
@@ -43,47 +83,16 @@ function openPopupTypeProfile() {
   popupTypeProfile.open();
 };
 
-//создаём попап добавления карточки
-const popupTypeCard = new PopupWithForm(cardPopup,
-  {
-    handleSubmitForm: (data) => {
-    cards.addItem(data);
-    popupTypeCard.close();
-  }
-});
-
 function openPopupTypeCard() {
   validateFormAddCard.resetErrors();
   validateFormAddCard.toggleButtonState();
   popupTypeCard.open();
-}
+};
 
-//добавляем карточки на страницу из массива
-const cards = new Section({
-  items: initialCards,
-  renderer: item => {
-    const card = new Card({
-      data: item, handleCardClick: () => {
-        const popupTypeImage = new PopupWithImage(imagePopup);
-        popupTypeImage.open(item.place, item.link);
-        popupTypeImage.setEventListeners();
-      }
-    }, '#card-template');
-    const cardElement = card.generateCard();
-    return cardElement;
-  }
-}, cardsList);
-
-cards.renderItems(); //вызываем метод отображения карточек на странице
-
-
-const validateFormEditProfile = new FormValidator(configValidation, popupFormProfile);
-validateFormEditProfile.enableValidation();
-const validateFormAddCard = new FormValidator(configValidation, popupFormCard);
-validateFormAddCard.enableValidation();
-
-popupTypeProfile.setEventListeners();
+//навешиваем обработчики на попапы
 popupTypeCard.setEventListeners();
+popupTypeImage.setEventListeners();
+popupTypeProfile.setEventListeners();
 
 profileEditButton.addEventListener('click', openPopupTypeProfile);
 profileAddButton.addEventListener('click', openPopupTypeCard);
