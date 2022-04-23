@@ -4,6 +4,8 @@ export class Card {
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._place = data.place;
+    this._link = data.link;
   }
 
   //шаблон карточки
@@ -36,7 +38,7 @@ export class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-      this._handleCardClick();
+      this._handleCardClick(this._place, this._link);
     });
   }
 

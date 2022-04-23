@@ -42,7 +42,7 @@ function createCard(item) {
   const card = new Card({
     data: item,
     handleCardClick: (place, link) => {
-      popupTypeImage.open(item.place, item.link);
+      popupTypeImage.open(place, link);
     }
   }, '#card-template');
   return card.generateCard();
