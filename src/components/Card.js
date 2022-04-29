@@ -48,7 +48,7 @@ export class Card {
     this._element = this._getTemplate();
     this._elementTitle = this._element.querySelector('.element__title');
     this._cardImage = this._element.querySelector('.element__image');
-    this._likeButton = this._element.querySelector('.element__like');
+    this._likeButton = this._element.querySelector('.element__like-image');
     this._deleteButton = this._element.querySelector('.element__delete-button');
 
     //наполняем атрибуты классовых переменных

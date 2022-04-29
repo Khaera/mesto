@@ -15,7 +15,10 @@
 
   <main>
     <section class="profile">
-      <img src="<%=require('./images/jak-iv-kusto.png')%>" alt="Фотография Жака-Ива Кусто" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="<%=require('./images/jak-iv-kusto.png')%>" alt="Аватар профиля" class="profile__avatar">
+        <img src="<%=require('./images/edit-button.svg')%>" alt="Редактировать аватар" class="profile__avatar-edit">
+      </div>
       <div class="profile__content">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -76,6 +79,28 @@
       </div>
     </div>
 
+    <div class="popup popup_type_confirm">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="submit" class="popup__save-button">Да</button>
+      </div>
+    </div>
+
+    <div class="popup popup_type_edit-avatar">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form name="edit-card" class="popup__form popup__form_edit-avatar">
+          <label class="popup__field">
+            <input value="" name="avatar" type="link" class="popup__input popup__input_edit_avatar" minlength="2" maxlength="30" required placeholder="Ссылка на картинку">
+            <span class="popup__input-error"></span>
+          </label>
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
   </main>
 
   <footer class="footer">
@@ -87,7 +112,10 @@
         <button type="button" class="element__delete-button"></button>
         <div class="element__info">
           <h2 class="element__title"></h2>
-          <button type="button" class="element__like"></button>
+          <button type="button" class="element__like">
+            <img src="<%=require('./images/like.svg')%>" alt="Кнопка Лайк" class="element__like-image">
+            <span class="element__like-count">0</span>
+          </button>
         </div>
       </li>
   </template>
