@@ -1,7 +1,7 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, { handleSubmitForm }) {
+  constructor(popupSelector, handleSubmitForm) {
     super(popupSelector);
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = this._form.querySelectorAll('.popup__input');
@@ -14,6 +14,10 @@ export class PopupWithForm extends Popup {
       inputValues[input.name] = input.value;
     });
     return inputValues;
+  }
+
+  changeButtonText(text) {
+    this._form.querySelector('.popup__save-button').textContent = text;
   }
 
   setEventListeners() {

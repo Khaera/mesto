@@ -1,38 +1,4 @@
-import moscowImage from '../images/moscow.jpg';
-import vladivostokImage from '../images/vladivostok.jpg';
-import dagestanImage from '../images/dagestan.jpg';
-import spbImage from '../images/saint-petersburg.jpg';
-import krasnodarImage from '../images/krasnodarskiy-kray.jpg';
-import olkhonImage from '../images/olkhon-island.jpg';
-
-//массив карточек
-export const initialCards = [
-  {
-    place: 'Москва',
-    link: moscowImage
-  },
-  {
-    place: 'Владивосток',
-    link: vladivostokImage
-  },
-  {
-    place: 'Дагестан',
-    link: dagestanImage
-  },
-  {
-    place: 'Санкт-Петербург',
-    link: spbImage
-  },
-  {
-    place: 'Краснодарский край',
-    link: krasnodarImage
-  },
-  {
-    place: 'Остров Ольхон',
-    link: olkhonImage
-  }
-];
-
+import api from '../pages/index.js'
 //объект настроек валидации
 export const configValidation = {
   formSelector: '.popup__form',
@@ -57,6 +23,14 @@ export const popupFormCard = document.querySelector('.popup__form_add_card');
 
 //переменные попапа увеличения изображения
 export const imagePopup = '.popup_type_picture';
+
+//попап подтверждения удаления
+export const confirmPopup = '.popup_type_confirm';
+
+//переменные попапа изменения аватара
+export const avatarPopup = '.popup_type_edit-avatar';
+export const popupFormAvatar = document.querySelector('.popup__form_edit_avatar');
+export const avatarEditButton = document.querySelector('.profile__avatar-container');
 
 //элемент, куда мы будем вставлять карточки
 export const cardsList = '.elements__list';
