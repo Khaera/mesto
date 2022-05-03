@@ -4,7 +4,7 @@ export class Api {
     this._headers = config.headers;
   };
 
-  _statusValidation(res) {
+  _getResponseData(res) {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   };
 
@@ -12,14 +12,14 @@ export class Api {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   };
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
       headers: this._headers
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   };
 
   editUserInfo(userData) {
@@ -30,7 +30,7 @@ export class Api {
         name: userData.name,
         about: userData.about
       })
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   };
 
   addNewCard( {name, link} ) {
@@ -41,28 +41,28 @@ export class Api {
         name: name,
         link: link
       })
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   };
 
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers,
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   }
 
   likeCard(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers,
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   }
 
   deleteLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   }
 
   editProfileAvatar( {link} ) {
@@ -72,7 +72,7 @@ export class Api {
       body: JSON.stringify({
         avatar: link
       })
-    }).then((res) => this._statusValidation(res));
+    }).then((res) => this._getResponseData(res));
   }
 };
 

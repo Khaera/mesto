@@ -1,4 +1,3 @@
-import api from '../pages/index.js'
 //объект настроек валидации
 export const configValidation = {
   formSelector: '.popup__form',
