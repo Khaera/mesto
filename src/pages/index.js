@@ -69,7 +69,7 @@ const popupTypeProfile = new PopupWithForm(profilePopup, handleSubmitProfileForm
 const popupTypeAvatar = new PopupWithForm(avatarPopup, handleSubmitAvatarForm);
 
 //создаём попап добавления карточки
-const popupTypeCard = new PopupWithForm(cardPopup, handleAddCardForm);
+const popupTypeCard = new PopupWithForm(cardPopup, handleSubmitAddCardForm);
 
 //функция создания карточки
 function createCard(data) {
@@ -130,7 +130,7 @@ function handleDeleteCardClick(card) {
   })
 }
 
-function handleAddCardForm(data) {
+function handleSubmitAddCardForm(data) {
   popupTypeCard.changeButtonText("Создание...");
   const cardsData = {
     name: data["place"],
