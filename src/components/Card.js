@@ -28,7 +28,7 @@ export class Card {
     return cardElement;
   }
 
-  _updateLikeFilling() {
+  _updateLikes() {
     this.isLiked() ? this.putLike() : this.removeLike();
   }
 
@@ -55,6 +55,12 @@ export class Card {
     this._likeButton.classList.remove('element__like_active');
   }
 
+  //проверяем кем создана карточка
+  _checkOwnerCard() {
+    if (this._owner._id !== this._userId) {
+      this._deleteButton.remove();
+    }
+  }
   //добавляем события
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
@@ -80,10 +86,6 @@ export class Card {
     this._deleteButton = this._element.querySelector('.element__delete-button');
     this._likesCounter = this._element.querySelector('.element__like-count');
 
-    if (this._owner._id !== this._userId) {
-      this._deleteButton.remove();
-    }
-
 
     //наполняем атрибуты классовых переменных
     this._cardImage.src = this._link;
@@ -92,7 +94,8 @@ export class Card {
 
     this._setEventListeners();
     this.addLikes(this._likes);
-    this._updateLikeFilling();
+    this._updateLikes();
+    this._checkOwnerCard();
     return this._element;
   }
 }
