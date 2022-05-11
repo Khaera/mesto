@@ -19,6 +19,6 @@
     2. Переписать код проекта с использованием фреймворка React
 
 ### Ссылка на проект:
-    [GitHub Pages](https://khaera.github.io/mesto/)
+    (https://khaera.github.io/mesto/)
 
 ## Спасибо за внимание!
